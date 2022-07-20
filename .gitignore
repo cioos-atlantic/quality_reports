@@ -1,6 +1,9 @@
 # Ignore JetBrains
 .idea
 
+# Ignore Jupyter notebook misc
+.ipynb_checkpoints
+
 # Ignore local data folder
 data
 force/output/*
