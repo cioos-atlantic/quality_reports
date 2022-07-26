@@ -16,3 +16,6 @@ dependencies:
   - matplotlib
   - shapely
   - pyproj
+  - scipy
+- pip:
+    - pip-system-certs
