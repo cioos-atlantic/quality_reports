@@ -8,7 +8,7 @@ dependencies:
   - jupyter
   - erddapy
   - httpx
-  - ioos_qc
+  - ioos_qc>=2.0.1
   - bokeh
   - pandas
   - python-dateutil

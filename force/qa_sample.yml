@@ -1,0 +1,50 @@
+contexts:
+  - region: null
+    window: 
+      starting: null
+      ending: null
+    streams:
+
+  # TODO: Include formal definition for windspeed here.
+      wind_speed:
+        qartod:
+          gross_range_test:
+            suspect_span: [0, 20] 
+            fail_span: [0, 40]
+
+  # TODO - include formal definition for air_temperature here.
+      air_temperature:
+        qartod:
+          gross_range_test:
+            suspect_span: [-40, 40]
+            fail_span: [-50, 50]
+
+      air_potential_temperature:
+        qartod:
+          gross_range_test:
+            suspect_span: [-40, 40]
+            fail_span: [-50, 50]
+      
+      solar_irradiance:
+        qartod:
+          gross_range_test:
+            suspect_span: [0, 1]
+            fail_span: [0, 2]
+
+      # We could probably include another calculation 
+      # that marks this value against absolute and temperature.
+      # It would only require that the calculation be made in a dataframe and then
+      # added to the configuration.
+
+      relative_humidity:
+        qartod:
+          gross_range_test:
+            suspect_span: [10, 90]
+            fail_span: [0, 100]
+      
+          
+          
+
+          
+
+   
