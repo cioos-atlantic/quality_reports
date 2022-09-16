@@ -2,30 +2,45 @@ contexts:
 
   # Contexts are readings found in a specific location and time-period
   - region: 
+  # Should be formatted as GeoJSON
       type: Feature
       features: 
-       - geometry:
-         type: Point
-         coordinates:
-           - -64.403
-           - 45.3713
+        - geometry:
+            type: Point
+            coordinates:
+              - -64.403
+              - 45.3713
+          properties:
+            name: Force Meteorological Dataset
+  # Beginning and end point of the dataset
     window: 
       starting: 2016-12-09 14:19:23+00:00
       ending: null
     streams:
-
-  # TODO: Include formal definition for windspeed here.
       wind_speed:
         qartod:
+        # required:
+        #   timing / gap test
+        #   syntax test
+          location_test:
+            bbox: [-65, 45, -64, 46]
           gross_range_test:
             suspect_span: [0, 20] 
             fail_span: [0, 40]
-      
-      wind_speed_with_na:
-        qartod:
-          gross_range_test:
-            suspect_span: [0, 20]
-            fail_span: [0, 40]
+        # highly recommended:
+          spike_test:
+            suspect_threshold: 20
+            fail_threshold: 40
+          flat_line_test:
+            suspect_threshold: 43200
+            fail_threshold: 86400
+            tolerance: 1
+          rate_of_change_test:
+            threshold: 5
+        # suggested:
+        #   multi-variate test
+        #   attenuated signal test
+        #   neighbor test
 
   # TODO - include formal definition for air_temperature here.
       air_temperature:
@@ -33,6 +48,28 @@ contexts:
           gross_range_test:
             suspect_span: [-40, 40]
             fail_span: [-50, 50]
+          climatology_test:
+            config:
+            - vspan: [0.01, 30]
+              zspan: [0, 30]
+              tspan: [0, 1]
+              fspan: [0, 55]
+              period: quarter
+            - vspan: [0.01, 25]
+              zspan: [0, 30]
+              tspan: [1, 2]
+              fspan: [0, 30]
+              period: quarter
+            - vspan: [0.01, 25]
+              zspan: [0, 30]
+              tspan: [2, 3]
+              fspan: [0, 30]
+              period: quarter
+            - vspan: [0.01, 30]
+              zspan: [0, 30]
+              tspan: [3, 4]
+              fspan: [0, 55]
+              period: quarter
 
       air_potential_temperature:
         qartod:
@@ -56,6 +93,11 @@ contexts:
           gross_range_test:
             suspect_span: [10, 90]
             fail_span: [0, 100]
+      air_pressure:
+        qartod:
+          gross_range_test:
+            suspect_span: []
+            fail_span: []
       
           
           
