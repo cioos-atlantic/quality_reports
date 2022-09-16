@@ -1,7 +1,16 @@
 contexts:
-  - region: null
+
+  # Contexts are readings found in a specific location and time-period
+  - region: 
+      type: Feature
+      features: 
+       - geometry:
+         type: Point
+         coordinates:
+           - -64.403
+           - 45.3713
     window: 
-      starting: null
+      starting: 2016-12-09 14:19:23+00:00
       ending: null
     streams:
 
@@ -10,6 +19,12 @@ contexts:
         qartod:
           gross_range_test:
             suspect_span: [0, 20] 
+            fail_span: [0, 40]
+      
+      wind_speed_with_na:
+        qartod:
+          gross_range_test:
+            suspect_span: [0, 20]
             fail_span: [0, 40]
 
   # TODO - include formal definition for air_temperature here.
