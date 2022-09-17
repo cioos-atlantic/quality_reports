@@ -27,16 +27,6 @@ contexts:
           gross_range_test:
             suspect_span: [0, 20] 
             fail_span: [0, 40]
-        # highly recommended:
-          spike_test:
-            suspect_threshold: 20
-            fail_threshold: 40
-          flat_line_test:
-            suspect_threshold: 43200
-            fail_threshold: 86400
-            tolerance: 1
-          rate_of_change_test:
-            threshold: 5
           climatology_test:
             config:
               - vspan: [0.01, 30]
@@ -59,9 +49,25 @@ contexts:
                 tspan: [3, 4]
                 fspan: [0, 55]
                 period: quarter
+        # highly recommended:
+          spike_test:
+            suspect_threshold: 20
+            fail_threshold: 40
+          flat_line_test:
+            suspect_threshold: 43200
+            fail_threshold: 86400
+            tolerance: 1
+          rate_of_change_test:
+            threshold: 5
+          
         # suggested:
         #   multi-variate test
-        #   attenuated signal test
+        #   According to the manual:
+        #   'It is doubtful that anyone is conducting tests such as these in real
+        #   time.'
+          attenuated_signal_test:
+            suspect_threshold: 5
+            fail_threshold: 0
         #   neighbor test
 
   # TODO - include formal definition for air_temperature here.

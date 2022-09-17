@@ -10,7 +10,7 @@ dependencies:
   - httpx
   - ioos_qc>=2.0.1
   - bokeh
-  - pandas
+  - pandas>=1.4.4
   - python-dateutil
   - netCDF4
   - matplotlib
