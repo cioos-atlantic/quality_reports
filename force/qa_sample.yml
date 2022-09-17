@@ -37,6 +37,28 @@ contexts:
             tolerance: 1
           rate_of_change_test:
             threshold: 5
+          climatology_test:
+            config:
+              - vspan: [0.01, 30]
+                zspan: [0, 30]
+                tspan: [0, 1]
+                fspan: [0, 55]
+                period: quarter
+              - vspan: [0.01, 25]
+                zspan: [0, 30]
+                tspan: [1, 2]
+                fspan: [0, 30]
+                period: quarter
+              - vspan: [0.01, 25]
+                zspan: [0, 30]
+                tspan: [2, 3]
+                fspan: [0, 30]
+                period: quarter
+              - vspan: [0.01, 30]
+                zspan: [0, 30]
+                tspan: [3, 4]
+                fspan: [0, 55]
+                period: quarter
         # suggested:
         #   multi-variate test
         #   attenuated signal test
@@ -47,29 +69,7 @@ contexts:
         qartod:
           gross_range_test:
             suspect_span: [-40, 40]
-            fail_span: [-50, 50]
-          climatology_test:
-            config:
-            - vspan: [0.01, 30]
-              zspan: [0, 30]
-              tspan: [0, 1]
-              fspan: [0, 55]
-              period: quarter
-            - vspan: [0.01, 25]
-              zspan: [0, 30]
-              tspan: [1, 2]
-              fspan: [0, 30]
-              period: quarter
-            - vspan: [0.01, 25]
-              zspan: [0, 30]
-              tspan: [2, 3]
-              fspan: [0, 30]
-              period: quarter
-            - vspan: [0.01, 30]
-              zspan: [0, 30]
-              tspan: [3, 4]
-              fspan: [0, 55]
-              period: quarter
+            fail_span: [-50, 50] 
 
       air_potential_temperature:
         qartod:
@@ -96,8 +96,8 @@ contexts:
       air_pressure:
         qartod:
           gross_range_test:
-            suspect_span: []
-            fail_span: []
+            suspect_span: [0, 200]
+            fail_span: [0, 200]
       
           
           
