@@ -19,14 +19,14 @@ contexts:
     streams:
       wind_speed:
       # Manual: https://cdn.ioos.noaa.gov/media/2017/12/QARTOD_Wind_Manual_v1.1_final_draft_signed.pdf
-        util: 
-          
         qartod:
         # required:
         #   timing / gap test
         #   syntax test
+          utils:
+            check_timestamps:
           location_test:
-            bbox: [45, -65, 46, -64]
+            bbox: [-65, 45, -64, 46]
           gross_range_test:
             suspect_span: [0, 20] 
             fail_span: [0, 40]
@@ -69,8 +69,11 @@ contexts:
         #   'It is doubtful that anyone is conducting tests such as these in real
         #   time.'
           attenuated_signal_test:
-            suspect_threshold: 5
-            fail_threshold: 0
+            suspect_threshold: 10
+            fail_threshold: 5
+            check_type: std
+            test_period: 650800
+            min_period: 0
         #   neighbor test
 
   # TODO - include formal definition for air_temperature here.
@@ -91,20 +94,20 @@ contexts:
                 tspan: [0, 1]
                 fspan: [-55, 30]
                 period: quarter
-              - vspan: [-10, 30]
+              - vspan: [-40, 15]
                 zspan: [0, 30]
                 tspan: [1, 2]
-                fspan: [-20, 40]
+                fspan: [-50, 40]
                 period: quarter
-              - vspan: [0, 40]
+              - vspan: [-10, 40]
                 zspan: [0, 30]
                 tspan: [2, 3]
-                fspan: [-10, 50]
+                fspan: [-15, 50]
                 period: quarter
-              - vspan: [-40, 20]
+              - vspan: [0, 30]
                 zspan: [0, 30]
                 tspan: [3, 4]
-                fspan: [-55, 30]
+                fspan: [-10, 40]
                 period: quarter
           # Recommended:
           spike_test:
@@ -135,20 +138,20 @@ contexts:
                 tspan: [0, 1]
                 fspan: [-55, 30]
                 period: quarter
-              - vspan: [-10, 30]
+              - vspan: [-40, 15]
                 zspan: [0, 30]
                 tspan: [1, 2]
-                fspan: [-20, 40]
+                fspan: [-50, 40]
                 period: quarter
-              - vspan: [0, 40]
+              - vspan: [-10, 40]
                 zspan: [0, 30]
                 tspan: [2, 3]
-                fspan: [-10, 50]
+                fspan: [-15, 50]
                 period: quarter
-              - vspan: [-40, 20]
+              - vspan: [0, 30]
                 zspan: [0, 30]
                 tspan: [3, 4]
-                fspan: [-55, 30]
+                fspan: [-10, 40]
                 period: quarter
       
       solar_irradiance:

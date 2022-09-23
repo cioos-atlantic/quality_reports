@@ -1,0 +1,22 @@
+name: quality
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python>=3.9
+  - notebook>=6
+  - jupyter
+  - erddapy
+  - httpx
+  - ioos_qc>=2.0.1
+  - bokeh
+  - pandas>=1.4.4
+  - python-dateutil
+  - netCDF4
+  - matplotlib
+  - shapely
+  - pyproj
+  - scipy
+  - pip
+  - pip:
+      - pip-system-certs

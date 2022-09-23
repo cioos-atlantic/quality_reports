@@ -1,0 +1,227 @@
+contexts:
+
+  # Contexts are readings found in a specific location and time-period
+  - region: 
+  # Should be formatted as GeoJSON
+      type: Feature
+      features: 
+        - geometry:
+            type: Point
+            coordinates:
+              - 43.69854
+              - -65.194244
+          properties:
+            name: CMAR Jordans Bay
+  # Beginning and end point of the dataset
+    window: 
+      starting: 2019-10-22T13:53:00Z
+      ending: null
+    streams:
+      wind_speed:
+      # Manual: https://cdn.ioos.noaa.gov/media/2017/12/QARTOD_Wind_Manual_v1.1_final_draft_signed.pdf
+        qartod:
+        # required:
+        #   timing / gap test
+        #   syntax test
+          utils:
+            check_timestamps:
+          location_test:
+            bbox: [-66, 43, -65, 44]
+          gross_range_test:
+            suspect_span: [0, 20] 
+            fail_span: [0, 40]
+          climatology_test:
+            config:
+              - vspan: [0.01, 30]
+                zspan: [0, 30]
+                tspan: [0, 1]
+                fspan: [0, 55]
+                period: quarter
+              - vspan: [0.01, 25]
+                zspan: [0, 30]
+                tspan: [1, 2]
+                fspan: [0, 30]
+                period: quarter
+              - vspan: [0.01, 25]
+                zspan: [0, 30]
+                tspan: [2, 3]
+                fspan: [0, 30]
+                period: quarter
+              - vspan: [0.01, 30]
+                zspan: [0, 30]
+                tspan: [3, 4]
+                fspan: [0, 55]
+                period: quarter
+        # highly recommended:
+          spike_test:
+            suspect_threshold: 20
+            fail_threshold: 40
+          flat_line_test:
+            suspect_threshold: 43200 # in seconds
+            fail_threshold: 86400 # in seconds
+            tolerance: 1
+          rate_of_change_test:
+            threshold: 5
+          
+        # suggested:
+        #   multi-variate test
+        #   According to the manual:
+        #   'It is doubtful that anyone is conducting tests such as these in real
+        #   time.'
+          attenuated_signal_test:
+            suspect_threshold: 10
+            fail_threshold: 5
+            check_type: std
+            test_period: 650800
+            min_period: 0
+        #   neighbor test
+
+  # TODO - include formal definition for air_temperature here.
+      air_temperature:
+      # Manual: https://repository.oceanbestpractices.org/bitstream/handle/11329/1369/QARTOD_TS_Manual_Update2_200324_final.pdf?sequence=3&isAllowed=y
+        qartod:
+          # Required
+          # Gap test
+          # Syntax test
+          # Location test (see wind_speed)
+          gross_range_test:
+            suspect_span: [-40, 40]
+            fail_span: [-50, 50]
+          climatology_test:
+            config:
+              - vspan: [-40, 20]
+                zspan: [0, 30]
+                tspan: [0, 1]
+                fspan: [-55, 30]
+                period: quarter
+              - vspan: [-40, 15]
+                zspan: [0, 30]
+                tspan: [1, 2]
+                fspan: [-50, 40]
+                period: quarter
+              - vspan: [-10, 40]
+                zspan: [0, 30]
+                tspan: [2, 3]
+                fspan: [-15, 50]
+                period: quarter
+              - vspan: [0, 30]
+                zspan: [0, 30]
+                tspan: [3, 4]
+                fspan: [-10, 40]
+                period: quarter
+          # Recommended:
+          spike_test:
+            suspect_threshold: 40
+            fail_threshold: 50
+          flat_line_test:
+            suspect_threshold: 43200 # in seconds
+            fail_threshold: 86400 # in seconds
+            tolerance: 1
+          rate_of_change_test:
+            threshold: 5
+          # Suggested:
+          # multi-variate test
+          # attenuated signal test
+          # neighbour test
+          # ts_curve / space test
+          # density inversion test
+
+      sea_water_temperature:
+        qartod:
+          gross_range_test:
+            suspect_span: [-40, 40]
+            fail_span: [-50, 50]
+          climatology_test:
+            config:
+              - vspan: [-4, 20]
+                zspan: [0, 30]
+                tspan: [0, 1]
+                fspan: [-8, 30]
+                period: quarter
+              - vspan: [-4, 15]
+                zspan: [0, 30]
+                tspan: [1, 2]
+                fspan: [-8, 40]
+                period: quarter
+              - vspan: [-4, 40]
+                zspan: [0, 30]
+                tspan: [2, 3]
+                fspan: [-8, 50]
+                period: quarter
+              - vspan: [0, 30]
+                zspan: [0, 30]
+                tspan: [3, 4]
+                fspan: [-4, 40]
+                period: quarter
+      
+      wave_ht_sig:
+        qartod:
+          gross_range_test:
+            suspect_span: [0, 650] 
+            fail_span: [0, 1000] # Sahara levels
+
+      wave_ht_max:
+        qartod:
+          gross_range_test:
+            suspect_span: [0, 650]
+            fail_span: [0, 1000]
+
+      # We could probably include another calculation 
+      # that marks this value against absolute and temperature.
+      # It would only require that the calculation be made in a dataframe and then
+      # added to the configuration.
+
+      humidity_percent:
+        qartod:
+          gross_range_test:
+            suspect_span: [1, 99]
+            fail_span: [0, 100]
+      air_pressure:
+        qartod:
+          gross_range_test:
+            suspect_span: [950, 1050]
+            fail_span: [900, 1100]
+      neighbour_air_temperature_diff:
+        qartod:
+          gross_range_test:
+            suspect_span: [-5, 5]
+            fail_span: [-10, 10]
+      neighbour_air_pressure_diff:
+        qartod:
+          gross_range_test:
+            suspect_span: [-5, 5]
+            fail_span: [-10, 10]
+      neighbour_wind_speed_diff:
+        qartod:
+          gross_range_test:
+            suspect_span: [-5, 5]
+            fail_span: [-10, 10]
+
+  - region: 
+  # Should be formatted as GeoJSON
+  # Using a nearby feature for neighbor testing
+      type: Feature
+      features: 
+        - geometry:
+            type: Point
+            coordinates:
+              - 44.0 # Approximate locations
+              - -66.0
+          properties:
+            name: CMAR - St. Mary's Bay
+    window: 
+      starting: 2020-07-16 11:19:00Z
+      ending: 2021-06-18 11:53:00Z
+    streams: 
+      air_temperature:
+        qartod: 
+          gross_range_test:
+            suspect_span: [-40, 40]
+            fail_span: [-50, 50]
+      
+          
+          
+
+          
+
+   
